@@ -712,8 +712,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b8b470793f62694409b9abbb8383c5c7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  dust: {fileID: 813432818408636504, guid: b0b58a0775577624da0e5ff3297c1d3b, type: 3}
   stardust: 0
   text: {fileID: 860545889}
+  augment: 1
+  spawnrate: 1
+  Timer: 1
 --- !u!4 &1954652303
 Transform:
   m_ObjectHideFlags: 0
