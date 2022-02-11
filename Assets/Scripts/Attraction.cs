@@ -45,14 +45,15 @@ public class Attraction : MonoBehaviour
         //gravityStrength = playerRb.mass / (Mathf.Pow(gravityDistance),4);
         //rb.AddForce(gravityDirection * Mathf.Abs(gravityStrength));
 
-        gravityDistance = Mathf.Max((Mathf.Abs(gravityEcart.x) + Mathf.Abs(gravityEcart.y)) * 0.78f, Mathf.Abs(gravityEcart.x), Mathf.Abs(gravityEcart.y));
+        //gravityDistance = Mathf.Max((Mathf.Abs(gravityEcart.x) + Mathf.Abs(gravityEcart.y)) * 0.78f, Mathf.Abs(gravityEcart.x), Mathf.Abs(gravityEcart.y));
 
-        gravityDirection = gravityEcart / Mathf.Max(gravityEcart.x, gravityEcart.y);
+        gravityDistance = Vector3.Distance(player.transform.position, this.transform.position);
+
+        gravityDirection = gravityEcart / Mathf.Max(Mathf.Abs(gravityEcart.x), Mathf.Abs(gravityEcart.y));
 
         gravityStrength = playerRb.mass / Mathf.Pow(gravityDistance, 3);
 
         rb.AddForce(gravityDirection * gravityStrength);
-
 
     }
 }
