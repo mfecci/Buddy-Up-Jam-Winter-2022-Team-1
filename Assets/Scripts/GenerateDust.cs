@@ -29,4 +29,9 @@ public class GenerateDust : MonoBehaviour
         actualDust = actualDust + (float.Parse(dustPerSecondText.text) * Time.fixedDeltaTime) / 3600;
         dustNumberText.text = Mathf.Floor(actualDust).ToString();
     }
+
+    public void Absorb(float massAbsorbed)
+    {
+        actualDust += Mathf.Pow(massAbsorbed,massAbsorbed) * 100;
+    }
 }
