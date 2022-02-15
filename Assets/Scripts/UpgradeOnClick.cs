@@ -7,7 +7,12 @@ public class UpgradeOnClick : MonoBehaviour
 {
     GameObject dustPerSecondUpgradeGameObject;
     Text dustPerSecondUpgradeText;
+    float actualDust;
+
     float dustPerSecondUpgradeValue;
+
+    GameObject dustNumberGameObject;
+    Text dustNumberText;
 
     GameObject dustPerSecondGameObject;
     Text dustPerSecondText;
@@ -17,6 +22,9 @@ public class UpgradeOnClick : MonoBehaviour
     {
         dustPerSecondUpgradeGameObject = GameObject.Find("PassiveDustUpgradeDescriptive");
         dustPerSecondUpgradeText = dustPerSecondUpgradeGameObject.GetComponent<Text>();
+
+        dustNumberGameObject = GameObject.Find("DustNumber");
+        dustNumberText = dustNumberGameObject.GetComponent<Text>();
 
         dustPerSecondGameObject = GameObject.Find("DustPerSecond");
         dustPerSecondText = dustPerSecondGameObject.GetComponent<Text>();
@@ -34,5 +42,9 @@ public class UpgradeOnClick : MonoBehaviour
 
         dustPerSecondText.text = (float.Parse(dustPerSecondText.text) + dustPerSecondUpgradeValue).ToString();
         dustPerSecondGameObject.GetComponent<RectTransform>().sizeDelta = new Vector2(dustPerSecondText.text.Length * 15, dustPerSecondGameObject.GetComponent<RectTransform>().sizeDelta.y);
+
+        actualDust = actualDust - (float.Parse(dustNumberText.text)) ;
+        dustNumberText.text = Mathf.Floor(actualDust).ToString();
+        print(dustNumberText.text);
     }
 }
