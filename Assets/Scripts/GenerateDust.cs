@@ -14,8 +14,10 @@ public class GenerateDust : MonoBehaviour
     Text generatedDustPerSecondText;
     public GameObject dustParticle;
     float dustPerSecond;
-    float actualDust;
-    public float Timer = 2;
+    public static float actualDust;
+    public static float Timer = 2;
+    public static float absortionValue;
+
 
     // Start is called before the first frame update
     void Start()
@@ -28,12 +30,14 @@ public class GenerateDust : MonoBehaviour
 
         generatedDustPerSecondGameObject = GameObject.Find("generatedDustPerSecond");
         generatedDustPerSecondText = generatedDustPerSecondGameObject.GetComponent<Text>();
+        absortionValue = 0.5f;
     }
 
     // Update is called once per frame
     void Update()
     {
         actualDust = actualDust + (float.Parse(dustPerSecondText.text) * Time.fixedDeltaTime) / 3600;
+        print(actualDust);
         dustNumberText.text = Mathf.Floor(actualDust).ToString();
         Timer -= Time.deltaTime;
         dustPerSecond = float.Parse(generatedDustPerSecondText.text);
@@ -63,6 +67,6 @@ public class GenerateDust : MonoBehaviour
 
     public void Absorb(float massAbsorbed)
     {
-        actualDust += Mathf.Pow(massAbsorbed,massAbsorbed) * 100;
+        actualDust += Mathf.Pow(massAbsorbed,massAbsorbed) * absortionValue;
     }
 }

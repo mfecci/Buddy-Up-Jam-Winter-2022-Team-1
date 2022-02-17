@@ -10,7 +10,7 @@ public class UpgradeOnClick : MonoBehaviour
     float actualDust;
 
     float dustPerSecondUpgradeValue;
-
+    float upgradeCost;
     GameObject dustNumberGameObject;
     Text dustNumberText;
 
@@ -28,23 +28,37 @@ public class UpgradeOnClick : MonoBehaviour
 
         dustPerSecondGameObject = GameObject.Find("DustPerSecond");
         dustPerSecondText = dustPerSecondGameObject.GetComponent<Text>();
+
+        upgradeCost = 10;
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+        actualDust = GenerateDust.actualDust;
     }
 
     public void DustUpgrade()
     {
-        dustPerSecondUpgradeValue = float.Parse(dustPerSecondUpgradeText.text.Replace("+ ", "").Replace(" / Min",""));
-
+        if (GenerateDust.actualDust< upgradeCost)
+        {
+            return;
+        }
+        dustPerSecondUpgradeValue = float.Parse(dustPerSecondUpgradeText.text.Replace("+ ", "").Replace(" / sec",""));
+        dustPerSecondUpgradeValue = dustPerSecondUpgradeValue * 60;
         dustPerSecondText.text = (float.Parse(dustPerSecondText.text) + dustPerSecondUpgradeValue).ToString();
         dustPerSecondGameObject.GetComponent<RectTransform>().sizeDelta = new Vector2(dustPerSecondText.text.Length * 15, dustPerSecondGameObject.GetComponent<RectTransform>().sizeDelta.y);
 
-        actualDust = actualDust - (float.Parse(dustNumberText.text)) ;
+        GenerateDust.actualDust = GenerateDust.actualDust - 10 ;
         dustNumberText.text = Mathf.Floor(actualDust).ToString();
-        print(dustNumberText.text);
+        print(GenerateDust.actualDust);
+    }
+
+    public void SpawnRateUpgrade()
+    {
+        if (GenerateDust.actualDust < upgradeCost)
+        {
+            return;
+        }
     }
 }
